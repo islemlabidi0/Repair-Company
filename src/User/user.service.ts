@@ -1,5 +1,6 @@
+import { UpdateUserDto } from './Dto/update-user.dto';
 import { createUserDto } from './Dto/create-user.dto';
-import { Injectable, BadRequestException } from "@nestjs/common";
+import { Injectable, BadRequestException, NotFoundException } from "@nestjs/common";
 import { InjectRepository} from "@nestjs/typeorm";
 import { Repository } from "typeorm"; 
 import { User } from "./user.entity";
@@ -38,5 +39,27 @@ export class UserService{
         //  save user in database
         return this.userRepository.save(user);
 
+    }
+
+    async update(
+        id: number,
+        UpdateUserDto: UpdateUserDto,
+    ): Promise<User>{
+        const user = await this.userRepository.findOne({
+            where: { id },
+        });
+        if(!user){
+            throw new NotFoundException('User not found');
+        }
+
+        //netaakdou ken l body fera5 wale
+        if(!UpdateUserDto.role || UpdateUserDto.role === user.role){
+            throw new BadRequestException('No changes made');
+        }
+
+        //apply the update
+        user.role = UpdateUserDto.role;
+
+        return this.userRepository.save(user);
     }
 }
