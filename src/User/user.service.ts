@@ -62,4 +62,18 @@ export class UserService{
 
         return this.userRepository.save(user);
     }
+
+    //get all users
+    async findAll(): Promise<User[]> {
+        return this.userRepository.find();
+    }
+
+    //get a user by ID
+    async findOne(id: number): Promise<User> {
+        const user = await this.userRepository.findOne({where: { id } });
+        if(!user) {
+            throw new NotFoundException(`User with ID ${id} not found`);
+        }
+        return user;
+    }
 }
