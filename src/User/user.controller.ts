@@ -1,7 +1,7 @@
 import { createUserDto } from './Dto/create-user.dto';
 import { UpdateUserDto } from './Dto/update-user.dto';
 import { UserService } from './user.service';
-import { Controller, Post, Body, ParseIntPipe, Patch, Param, Get } from "@nestjs/common";
+import { Controller, Post, Body, ParseIntPipe, Patch, Param, Get, Delete } from "@nestjs/common";
 
 //controller declaration , les routes lkol fl controller hetha yebdew b /users
 @Controller('users')
@@ -31,5 +31,10 @@ export class UserController{
     @Get(':id')
     findOne(@Param('id', ParseIntPipe) id: number){
         return this.UserService.findOne(id);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: number){
+        return this.UserService.remove(id);
     }
 }
