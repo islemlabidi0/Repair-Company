@@ -1,5 +1,5 @@
 import { CreateDeviceDto } from './Dto/create-device.dto';
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Device } from "./device.entity";
@@ -30,5 +30,18 @@ export class DeviceService {
     //pour afficher tous les devices
     async getAll(): Promise<Device[]> {
         return this.deviceRepository.find();
+    }
+
+    //just l admin ynjm ysafa5 device
+    async remove(id: number): Promise<{message: string}>{
+        const device = await this.deviceRepository.findOne({where: { id }});
+        //netaakdou ken device mawjouda 
+        if(!device){
+            throw new NotFoundException(`Device with ID ${id} not found`);
+        }
+        //nfas5ou device ml base
+        await this.deviceRepository.delete(id);
+
+        return{ message: `Device with ID ${id} deleted successfully`};
     }
 }

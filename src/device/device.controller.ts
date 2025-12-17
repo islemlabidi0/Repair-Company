@@ -1,5 +1,5 @@
 import { DeviceService } from './device.service';
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { CreateDeviceDto } from './Dto/create-device.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
@@ -20,4 +20,10 @@ export class DeviceController {
     getAll(){
         return this.DeviceService.getAll();
     }
+
+    @Delete(':id')
+    remove(@Param('id') id: number){
+        return this.DeviceService.remove(id);
+    }
+    
 }
