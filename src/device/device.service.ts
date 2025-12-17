@@ -26,4 +26,9 @@ export class DeviceService {
     const device = this.deviceRepository.create(CreateDeviceDto);
     return this.deviceRepository.save(device);
     }
+
+    //pour afficher tous les devices
+    async getAll(): Promise<Device[]> {
+        return this.deviceRepository.find();
+    }
 }

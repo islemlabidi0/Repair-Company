@@ -1,5 +1,5 @@
 import { DeviceService } from './device.service';
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { CreateDeviceDto } from './Dto/create-device.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
@@ -14,5 +14,10 @@ export class DeviceController {
     //createDeviceDto 5tr lezm lbody match the createDeviceDto
     create(@Body() CreateDeviceDto: CreateDeviceDto){
         return this.DeviceService.create(CreateDeviceDto);
+    }
+
+    @Get()
+    getAll(){
+        return this.DeviceService.getAll();
     }
 }
