@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 //bch l incoming requests yet3adew b Dtos 9bal mayemchiw ll controllers

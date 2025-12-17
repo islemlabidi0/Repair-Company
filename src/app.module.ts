@@ -8,6 +8,8 @@ import { UserModule } from './User/user.module';
 import { SparePartModule } from './sparepart/sparepart.module';
 import { DeviceModule } from './device/device.module';
 import { InterventionModule } from './intervention/intervention.module';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     // Load .env file eli 7atina fih esem database , username , password , port ...
@@ -33,7 +35,8 @@ import { InterventionModule } from './intervention/intervention.module';
       UserModule,
       SparePartModule,
       DeviceModule,
-      InterventionModule
+      InterventionModule,
+      AuthModule
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],
