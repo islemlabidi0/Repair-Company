@@ -1,8 +1,24 @@
 import { createUserDto } from './Dto/create-user.dto';
 import { UpdateUserDto } from './Dto/update-user.dto';
 import { UserService } from './user.service';
-import { Controller, Post, Body, ParseIntPipe, Patch, Param, Get, Delete } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  ParseIntPipe,
+  Patch,
+  Param,
+  Get,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { RolesGuard } from '../guards/roles.guard';
+import { Roles } from '../common/roles.decorator';
+
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles('ADMIN')
 //controller declaration , les routes lkol fl controller hetha yebdew b /users
 @Controller('users')
 export class UserController{
