@@ -10,7 +10,7 @@ export class Intervention {
   id: number;
 
   @Column({ type: 'date' })
-  date: string;
+  date: Date;
 
   @Column('text')
   description: string;
