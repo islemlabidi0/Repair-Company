@@ -12,6 +12,8 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { Request } from 'express';
+import { Req } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { RolesGuard } from '../guards/roles.guard';
@@ -53,4 +55,11 @@ export class UserController{
     remove(@Param('id') id: number){
         return this.UserService.remove(id);
     }
+
+@Get('me/profile')
+getMyProfile(@Req() req: Request) {
+  const user = req.user as any; // injected by JwtStrategy
+  return this.UserService.findProfile(user.userId);
+}
+
 }

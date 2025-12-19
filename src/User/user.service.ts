@@ -87,4 +87,17 @@ export class UserService{
 
         return{ message: `User with ID ${id} deleted successfully`};
     }
+// see profile
+    async findProfile(userId: number): Promise<User> {
+  const user = await this.userRepository.findOne({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new NotFoundException('User not found');
+  }
+
+  return user;
+}
+
 }
