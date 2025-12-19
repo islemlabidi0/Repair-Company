@@ -1,7 +1,7 @@
 import { DeviceService } from './device.service';
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { CreateDeviceDto } from './Dto/create-device.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 //lezm yebda user connected bch ynjm
 @UseGuards(JwtAuthGuard)
