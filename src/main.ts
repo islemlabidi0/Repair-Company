@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   //bch tactivi request validation ll app lkol
+  // ay field tabaathou fel body lezem ykoun mawjoud fi DTO w andou decorator
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
